@@ -9,10 +9,7 @@ LINE_TOKEN = "ovPcLgBzyxMsqwLjx2d/AToVtViPzXgf1r0rcrwNpf/B9eJG6M92FI3a1LK7daQgft
 USER_ID = "U1536e6ab5269bfd96c67970dcb4092ef"
 
 def main():
-    ip_server = "117.56.24.16"
-    url = f"https://{ip_server}/api/v1/rest/datastores/F-C0032-001?Authorization={CWA_API_KEY}"
-    url = f"{base_url}{path_url}?Authorization={CWA_API_KEY}"
-    
+    url = f"https://117.56.24{CWA_API_KEY}"
     response = requests.get(url, verify=False).json()
 
     all_locations = response["records"]["location"]
@@ -38,9 +35,9 @@ def main():
             }]
         }
         res = requests.post(line_url, headers=headers, json=payload)
-        print(f"發送成功，LINE 回傳狀態代碼：{res.status_code}")
+        print(f"Status Code: {res.status_code}")
     else:
-        print(f"今日降雨機率：{rain_chance}%，未達門檻不發送通知")
+        print(f"Chance: {rain_chance}%")
 
 if __name__ == "__main__":
     main()
