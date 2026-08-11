@@ -22,7 +22,7 @@ def main():
     threshold = 0
 
     if rain_chance >= threshold:
-        line_url = f"https://line.me/v2/bot/message/push"
+        line_url = "https://api.line.me/v2/bot/message/push"
         headers = {
             "Authorization": f"Bearer {LINE_TOKEN}",
             "Content-Type": "application/json"
