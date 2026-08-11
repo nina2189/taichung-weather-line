@@ -17,7 +17,7 @@ def main():
 
     weather_elements = taichung_data["weatherElement"]
     pop_element = next(item for item in weather_elements if item["elementName"] == "PoP")
-    rain_chance = int(pop_element["time"]["parameter"]["parameterName"])
+    rain_chance = int(pop_element["time"][0]["parameter"]["parameterName"])
 
     threshold = 0
 
