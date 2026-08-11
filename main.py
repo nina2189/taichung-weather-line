@@ -19,7 +19,7 @@ def main():
     pop_element = next(item for item in weather_elements if item["elementName"] == "PoP")
     rain_chance = int(pop_element["time"][0]["parameter"]["parameterName"])
 
-    threshold = 0
+    threshold = 40
 
     if rain_chance >= threshold:
         line_url = "https://api.line.me/v2/bot/message/push"
