@@ -9,8 +9,8 @@ LINE_TOKEN = "ovPcLgBzyxMsqwLjx2d/AToVtViPzXgf1r0rcrwNpf/B9eJG6M92FI3a1LK7daQgft
 USER_ID = "U1536e6ab5269bfd96c67970dcb4092ef"
 
 def main():
-    base_url = "https://cwa.gov.tw"
-    path_url = "/api/v1/rest/datastores/F-C0032-001"
+    ip_server = "117.56.24.16"
+    url = f"https://{ip_server}/api/v1/rest/datastores/F-C0032-001?Authorization={CWA_API_KEY}"
     url = f"{base_url}{path_url}?Authorization={CWA_API_KEY}"
     
     response = requests.get(url, verify=False).json()
