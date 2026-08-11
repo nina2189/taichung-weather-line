@@ -15,7 +15,7 @@ def main():
     all_locations = response["records"]["location"]
     taichung_data = next(item for item in all_locations if item["locationName"] == "臺中市")
 
-    weather_elements = taichung_data["weatherElement"]
+    weather_elements = taichung_data["weatherElement"]˙
     pop_element = next(item for item in weather_elements if item["elementName"] == "PoP")
     rain_chance = int(pop_element["time"]["parameter"]["parameterName"])
 
