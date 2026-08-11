@@ -5,7 +5,7 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 CWA_API_KEY = "CWA-C2A9D003-668C-4B88-9A43-952B87902D00"
-LINE_TOKEN = "ovPcLgBzyxMsqwLjx2d/AToVtViPzXgf1r0rcrwNpf/B9eJG6M92FI3a1LK7daQgftLWCQ22H6yq9AbTtiK6mIMnhVSq0ShOz7CRyh/SQx2nnQ94VTvQvkqqr9Uo/Y2H5Y1m6g57b+Ssc0I6bI1LwdB04t89/1O/w1cDnyilFU="
+LINE_TOKEN = "FRlGZ5nPb1B+F4xJ4kTVpi28rlXNzgiMZ/VsWpj0zFq5lL5n1m7SjFRePkHG7afZfT1WCQl22H6yq9AbTtiK6mIMnhVSq0ShOz7CRyh/SQxfK0znYNhcBwA3j0GrZX1n2xQ+CRcHOuIuOHWMOPTm3QdB04t89/1O/w1cDnyilFU="
 USER_ID = "U1536e6ab5269bfd96c67970dcb4092ef"
 
 def main():
