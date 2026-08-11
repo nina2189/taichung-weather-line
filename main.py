@@ -6,7 +6,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 CWA_API_KEY = "CWA-C2A9D003-668C-4B88-9A43-952B87902D00"
 LINE_TOKEN = "FRlGZ5nPb1B+F4xJ4kTVpi28rlXNzgiMZ/VsWpj0zFq5lL5n1m7SjFRePkHG7afZfT1WCQl22H6yq9AbTtiK6mIMnhVSq0ShOz7CRyh/SQxfK0znYNhcBwA3j0GrZX1n2xQ+CRcHOuIuOHWMOPTm3QdB04t89/1O/w1cDnyilFU="
-USER_ID = "U1536e6ab5269bfd96c67970dcb4092ef"
+USER_ID = "U1536e6ab5269bfd96c67970dcb409e2f"
 
 def main():
     url = f"https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWA-C2A9D003-668C-4B88-9A43-952B87902D00"
