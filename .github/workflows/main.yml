@@ -1,0 +1,24 @@
+name: Daily Weather Line Notification
+
+on:
+  workflow_dispatch: # 手動測試按鈕
+  schedule:
+    - cron: '0 23 * * *' # 每天早上 07:00 (台灣時間)
+
+jobs:
+  run-weather-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 檢查程式碼
+        uses: actions/checkout@v4
+
+      - name: 設定 Python 環境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 安裝網路請求套件
+        run: pip install requests urllib3
+
+      - name: 執行天氣通知
+        run: python main.py
