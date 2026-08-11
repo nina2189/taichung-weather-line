@@ -9,7 +9,8 @@ LINE_TOKEN = "ovPcLgBzyxMsqwLjx2d/AToVtViPzXgf1r0rcrwNpf/B9eJG6M92FI3a1LK7daQgfT
 USER_ID = "U1536e6ab5269bfd96c67970dcb4092ef"
 
 def main():
-    url = f"https://cwa.gov.tw/api/v1/rest/datastores/F-C0032-001?Authorization={CWA_API_KEY}"
+    base_url = "https://cwa.gov.tw"
+    path_url = "/api/v1/rest/datastores/F-C0032-001"
     response = requests.get(url, verify=False).json()
 
     all_locations = response["records"]["location"]
