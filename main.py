@@ -5,26 +5,39 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 CWA_API_KEY = "CWA-C2A9D003-668C-4B88-9A43-952B87902D00"
-LINE_TOKEN = "FRlGZ5nPb1B+F4xJ4kTVpi28rlXNzgiMZ/VsWpj0zFq5lL5n1m7SjFRePkHG7afZfT1WCQl22H6yq9AbTtiK6mIMnhVSq0ShOz7CRyh/SQxfK0znYNhcBwA3j0GrZX1n2xQ+CRcHOuIuOHWMOPTm3QdB04t89/1O/w1cDnyilFU="
+LINE_ACCESS_TOKEN = "FRlGZ5nPb1B+F4xJ4kTVpi28rlXNzgiMZ/VsWpj0zFq5lL5n1m7SjFRePkHG7afZfT1WCQl22H6yq9AbTtiK6mIMnhVSq0ShOz7CRyh/SQxfK0znYNhcBwA3j0GrZX1n2xQ+CRcHOuIuOHWMOPTm3QdB04t89/1O/w1cDnyilFU="
 USER_ID = "U1536e6ab5269bfd96c67970dcb409e2f"
 
+
 def main():
-    url = f"https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWA-C2A9D003-668C-4B88-9A43-952B87902D00"
+    url = "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWA-B969C6D1-AF9D-46C1-B2A2-8B3F25A3F7A1&locationName=臺中市"
     response = requests.get(url, verify=False).json()
 
     all_locations = response["records"]["location"]
     taichung_data = next(item for item in all_locations if item["locationName"] == "臺中市")
 
     weather_elements = taichung_data["weatherElement"]
-    pop_element = next(item for item in weather_elements if item["elementName"] == "PoP")
-    rain_chance = int(pop_element["time"][0]["parameter"]["parameterName"])
 
+    pop_element = next((item for item in weather_elements if item["elementName"] in ["PoP12h", "PoP"]), None)
+     
+    if pop_element and "time" in pop_element and len(pop_element["time"]) > 0:
+        time_data = pop_element["time"][0]
+        if "elementValue" in time_data:
+            rain_chance = int(time_data["elementValue"][0]["value"])
+        else:
+            rain_chance = int(time_data["parameter"]["parameterName"])
+    else:
+        rain_chance = 0  
+
+
+
+    
     threshold = 40
 
     if rain_chance >= threshold:
         line_url = "https://api.line.me/v2/bot/message/push"
         headers = {
-            "Authorization": f"Bearer {LINE_TOKEN}",
+            "Authorization": f"Bearer {LINE_ACCESS_TOKEN}",
             "Content-Type": "application/json"
         }
         payload = {
@@ -35,9 +48,10 @@ def main():
             }]
         }
         res = requests.post(line_url, headers=headers, json=payload)
-        print(f"Status Code: {res.status_code}")
+        
+        print(f"發送成功，LINE 回傳狀態代碼：{res.status_code}")
     else:
-        print(f"Chance: {rain_chance}%")
+        print(f"今日降雨機率：{rain_chance}%，未達門檻不發送通知")
 
 if __name__ == "__main__":
     main()
