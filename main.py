@@ -1,12 +1,13 @@
 import json
 import requests
 import urllib3
+import os
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 CWA_API_KEY = "CWA-C2A9D003-668C-4B88-9A43-952B87902D00"
-LINE_ACCESS_TOKEN = "FRlGZ5nPb1B+F4xJ4kTVpi28rlXNzgiMZ/VsWpj0zFq5lL5n1m7SjFRePkHG7afZfT1WCQl22H6yq9AbTtiK6mIMnhVSq0ShOz7CRyh/SQxfK0znYNhcBwA3j0GrZX1n2xQ+CRcHOuIuOHWMOPTm3QdB04t89/1O/w1cDnyilFU="
-USER_ID = "U1536e6ab5269bfd96c67970dcb409e2f"
+LINE_ACCESS_TOKEN = os.environ.get("LINE_ACCESS_TOKEN")
+USER_ID = os.environ.get("USER -ID")
 
 
 def main():
