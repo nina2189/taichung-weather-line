@@ -1,9 +1,9 @@
 name: Daily Weather Line Notification
 
 on:
-  workflow_dispatch: # 手動測試按鈕
+  workflow_dispatch:
   schedule:
-    - cron: '23 21 * * *' # 每天早上 07:00 (台灣時間)
+    - cron: '23 21 * * *' 
 
 jobs:
   run-weather-script:
@@ -21,4 +21,6 @@ jobs:
         run: pip install requests urllib3
 
       - name: 執行天氣通知
-        run: python main.py
+        env:
+          LINE_ACCESS_TOKEN: ${{ secrets.WEATHER_LINE_TOKEN }}
+        run: python weather.py
