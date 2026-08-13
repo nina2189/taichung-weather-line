@@ -5,7 +5,7 @@ import os
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-CWA_API_KEY = "CWA-C2A9D003-668C-4B88-9A43-952B87902D00"
+CWA_API_KEY = os.environ.get("CWA_API_KEY")
 LINE_ACCESS_TOKEN = os.environ.get("LINE_ACCESS_TOKEN")
 USER_ID = os.environ.get("USER -ID")
 
