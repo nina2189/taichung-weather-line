@@ -11,7 +11,7 @@ USER_ID = os.environ.get("USER_ID")
 
 
 def main():
-    url = "https://cwa.gov.tw"
+    url = "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWA-B969C6D1-AF9D-46C1-B2A2-8B3F25A3F7A1&locationName=臺中市"
     params = {"Authorization": CWA_API_KEY, "locationName": "臺中市"}
     response = requests.get(url, params=params, verify=False).json()
 
