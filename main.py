@@ -7,7 +7,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 CWA_API_KEY = os.environ.get("CWA_API_KEY")
 LINE_ACCESS_TOKEN = os.environ.get("LINE_ACCESS_TOKEN")
-USER_ID = os.environ.get("USER -ID")
+USER_ID = os.environ.get("USER_ID")
 
 
 def main():
