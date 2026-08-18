@@ -29,7 +29,7 @@ def main():
             rain_chance = int(time_data["parameter"]["parameterName"])
     else:
         rain_chance = 0
-    
+        
     threshold = 40
     
     if rain_chance >= threshold:
