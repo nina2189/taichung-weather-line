@@ -28,13 +28,10 @@ def main():
         else:
             rain_chance = int(time_data["parameter"]["parameterName"])
     else:
-        rain_chance = 0  
-
-
-
+        rain_chance = 0
     
     threshold = 40
-
+    
     if rain_chance >= threshold:
         line_url = "https://api.line.me/v2/bot/message/push"
         headers = {
@@ -45,11 +42,10 @@ def main():
             "to": USER_ID,
             "messages": [{
                 "type": "text",
-                "text": f"🌧️【出門提醒】目前台中預報降雨機率達 {rain_chance}%，出門記得帶傘喔！"
+                "text": f"🌧️ 【出門提醒】目前台中預報降雨機率達 {rain_chance}%，出門記得帶傘喔！"
             }]
         }
         res = requests.post(line_url, headers=headers, json=payload)
-        
         print(f"發送成功，LINE 回傳狀態代碼：{res.status_code}")
     else:
         print(f"今日降雨機率：{rain_chance}%，未達門檻不發送通知")
