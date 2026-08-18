@@ -1,7 +1,6 @@
 import json
 import requests
 import urllib3
-import os
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -12,8 +11,19 @@ USER_ID = os.environ.get("USER_ID")
 
 def main():
     url = "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWA-B969C6D1-AF9D-46C1-B2A2-8B3F25A3F7A1&locationName=臺中市"
-    params = {"Authorization": CWA_API_KEY, "locationName": "臺中市"}
-    response = requests.get(url, params=params, verify=False).json()
+    headers = {
+    "Authorization": CWA_API_KEY.strip()
+    }
+    params = {
+    "locationName": "臺中市"
+    }
+
+    ras = requests.get(url, params=params, headers=headers, verify=False)
+    try:
+        response = ras.json()
+    except Exception:
+        print(f"⚠️ 解碼失敗！氣象局吐回來的真正純文字其實是：{repr(ras.text)}")
+        return
 
     all_locations = response["records"]["location"]
     taichung_data = next(item for item in all_locations if item["locationName"] == "臺中市")
@@ -29,10 +39,10 @@ def main():
         else:
             rain_chance = int(time_data["parameter"]["parameterName"])
     else:
-        rain_chance = 0
-        
+        rain_chance = 0  
+
     threshold = 40
-    
+
     if rain_chance >= threshold:
         line_url = "https://api.line.me/v2/bot/message/push"
         headers = {
@@ -43,13 +53,15 @@ def main():
             "to": USER_ID,
             "messages": [{
                 "type": "text",
-                "text": f"🌧️ 【出門提醒】目前台中預報降雨機率達 {rain_chance}%，出門記得帶傘喔！"
+                "text": f"🌧️【出門提醒】目前台中預報降雨機率達 {rain_chance}%，出門記得帶傘喔！"
             }]
         }
         res = requests.post(line_url, headers=headers, json=payload)
+        
         print(f"發送成功，LINE 回傳狀態代碼：{res.status_code}")
     else:
         print(f"今日降雨機率：{rain_chance}%，未達門檻不發送通知")
 
 if __name__ == "__main__":
     main()
+
