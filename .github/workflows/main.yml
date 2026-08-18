@@ -24,5 +24,8 @@ jobs:
 
       - name: 執行天氣通知
         env:
-          LINE_ACCESS_TOKEN: ${{ secrets.WEATHER_LINE_TOKEN }}
+          # 🚨 重點：在這裡把 GitHub Secrets 對接到 Python 的 os.environ 中
+          CWA_API_KEY: ${{ secrets.CWA_API_KEY }}
+          LINE_ACCESS_TOKEN: ${{ secrets.LINE_ACCESS_TOKEN }}
+          USER_ID: ${{ secrets.USER_ID }}
         run: python main.py
