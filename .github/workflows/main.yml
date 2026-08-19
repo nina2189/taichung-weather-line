@@ -3,9 +3,7 @@ name: Daily Weather Line Notification
 on:
   workflow_dispatch:
   schedule:
-    - cron: '05 21 * * *'  # 鬧鐘 1：台灣 05:05
     - cron: '25 21 * * *'  # 鬧鐘 2：台灣 05:25
-    - cron: '45 21 * * *'  # 鬧鐘 3：台灣 05:45
 
 jobs:
   run-weather-script:
